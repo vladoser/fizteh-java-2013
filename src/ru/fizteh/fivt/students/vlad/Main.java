@@ -1,11 +1,8 @@
-package ru.fizteh.fivt.students.dmitryIvanovsky.fileMap;
+package ru.fizteh.fivt.students.vlad;
 
 import java.io.*;
 
-import ru.fizteh.fivt.students.dmitryIvanovsky.shell.CommandLauncher;
-import ru.fizteh.fivt.students.dmitryIvanovsky.shell.CommandLauncher.Code;
-
-public class DbMain {
+public class Main {
 
     public static void writePy() throws FileNotFoundException {
         String s = "import urllib2, base64\n" +
