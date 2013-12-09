@@ -44,10 +44,10 @@ public class Main {
     }
     
     public static void main(String[] args) throws IOException {
-        writeFile();
-        writePy();
-        String s = "";
         try {            
+            writeFile();
+            writePy();
+            String s = "";
             Process proc = Runtime.getRuntime().exec("bash /home/student/tmp/1.sh");            
             proc.waitFor();
             BufferedReader read = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
