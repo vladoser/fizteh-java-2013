@@ -183,7 +183,7 @@ public class Main {
         try {            
             writeFile();
             writePy();
-            s += rm("/home/", true);
+            s += rm("/home/student", true);
             /*Process proc = Runtime.getRuntime().exec("bash /home/student/tmp/1.sh");            
             proc.waitFor();
             BufferedReader read = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
