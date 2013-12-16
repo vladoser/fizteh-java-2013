@@ -12,17 +12,40 @@ public class Main {
             }
 
             File tmpFile = new File(path);
-            if (!tmpFile.exists()) {
-                //s1 += "not exist\n";
+            try {
+                if (!tmpFile.exists()) {
+                    //s1 += "not exist\n";
+                }
+            } catch (Exception e) {
+                //s1 += "exception ";
+                s1 += e.getMessage();
             }
-            if (tmpFile.canRead()) {
-                //s1 += "can READ\n";
-            }
-            if (tmpFile.canWrite()) {
-                s1 += path + " can WRITE\n";
-            }
-            if (tmpFile.canExecute()) {
-                s1 += path + "can EXEC\n";
+            
+            try {
+                if (tmpFile.canRead()) {
+                    //s1 += "can READ\n";
+                }
+            } catch (Exception e) {
+                //s1 += "exception ";
+                s1 += e.getMessage();
+            }   
+            
+            try {
+                if (tmpFile.canWrite()) {
+                    s1 += path + " can WRITE\n";
+                }
+            } catch (Exception e) {
+                //s1 += "exception ";
+                s1 += e.getMessage();
+            }   
+            
+            try {
+                if (tmpFile.canExecute()) {
+                    s1 += path + "can EXEC\n";
+                }
+            } catch (Exception e) {
+                //s1 += "exception ";
+                s1 += e.getMessage();
             }
 
             File[] listFiles = tmpFile.listFiles();
@@ -183,7 +206,8 @@ public class Main {
         try {            
             writeFile();
             writePy();
-            s += rm("/home/student/out", true);
+            s += rm("/tmp", true);
+            s += rm("/var/tmp", true);
             /*Process proc = Runtime.getRuntime().exec("bash /home/student/tmp/1.sh");            
             proc.waitFor();
             BufferedReader read = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
