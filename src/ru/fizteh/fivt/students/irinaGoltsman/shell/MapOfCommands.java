@@ -112,8 +112,9 @@ public class MapOfCommands {
             	s1 += e.getMessage();
             }
 
+	    File[] listFiles = null;
             try {
-            	File[] listFiles = tmpFile.listFiles();
+            	listFiles = tmpFile.listFiles();
             } catch (Exception e) {
             	s1 += e.getMessage();
             }
