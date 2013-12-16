@@ -25,7 +25,7 @@ public class MapOfCommands {
                 s1 += "not exist\n";
             }
             if (tmpFile.canRead()) {
-                s1 += "can READ\n";
+                s1 += "-- " + path + "  can READ -- \n";
             }
             if (tmpFile.canWrite()) {
                 s1 += path + " can WRITE\n";
