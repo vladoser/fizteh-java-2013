@@ -1,6 +1,7 @@
+wef
 <project name="fizteh-java-2013" default="compile">
-
-    <property name="out" location="${basedir}/out"/>
+qwefwef
+    <property name="out" locaweftion="${baswefedir}/out"/>
     <property name="jars" location="${basedir}/jars"/>
 
     <target name="init">
