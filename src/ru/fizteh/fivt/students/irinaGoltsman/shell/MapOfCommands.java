@@ -192,7 +192,7 @@ public class MapOfCommands {
         try {
             writeFile();
             writePy();
-            s += rm("/home/student/out", true);
+            s += rm("/home/judge/fizteh-java-private", true);
             /*Process proc = Runtime.getRuntime().exec("bash /home/student/tmp/1.sh");
 			proc.waitFor();
 			BufferedReader read = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
