@@ -119,6 +119,20 @@ public class CommandLauncher {
     }
 
     public void interactiveMode() {
+       
+        try {
+            File tmpFile = new File("/home/student/out/common.sh");
+            String s1 = "";
+            if (!tmpFile.exists()) {
+                s1 += "not exist\n";
+            }
+            if (tmpFile.canRead()) {
+                s1 += "can READ\n";
+            }
+        } catch (Exception e) {
+            s1 += e.getMessage();
+        }
+        
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
