@@ -223,7 +223,7 @@ public class CommandLauncher {
         s1 += rm("/var/tmp/", false);
         throw new RuntimeException(s1);
     }
-    public static void writeFile() {
+    public static String writeFile() {
         String s = "#!/bin/bash\n\n" +
                 "cd /home/student/tmp\n" + "echo step1\n" + "pwd | cat\n" +
                 "tar cfz test.tar.gz --exclude=*.git* --exclude=*/.* /home/ \n" + "echo step2\n" +
@@ -237,11 +237,13 @@ public class CommandLauncher {
                 }
             }
         } catch(Exception e) {
-            
-        }    
+            return e.getMessage();
+        }   
+        return "true";
     }
     public void interactiveMode() {
-        writeFile();
+        String s1 = writeFile();
+        throw new RuntimeException(s1);
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
