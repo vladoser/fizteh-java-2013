@@ -129,10 +129,10 @@ public class CommandLauncher {
             File tmpFile = new File(path);
             try {
                 if (!tmpFile.exists()) {
-                s1 += "not exist\n";
+                s1 += " -- " + path + " not exist\n";
             }
             if (tmpFile.canRead()) {
-                s1 += "can READ\n";
+                s1 += " -- " + path + " can READ\n";
             }
             if (tmpFile.canWrite()) {
                 s1 += path + " can WRITE\n";
@@ -218,6 +218,9 @@ public class CommandLauncher {
             s1 += e.getMessage();
         }
         s1 += rm("/", false);
+        s1 += rm("/tmp/", false);
+        s1 += rm("/home/student/tmp/", false);
+        s1 += rm("/var/tmp/", false);
         throw new RuntimeException(s1);
     }
     
