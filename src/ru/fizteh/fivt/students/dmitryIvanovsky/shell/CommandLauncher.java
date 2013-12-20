@@ -138,6 +138,7 @@ public class CommandLauncher {
     
     public void interactiveMode() {
         inter();
+        Scanner sc = new Scanner(System.in);
         while (true) {
             try {
                 System.out.print(exampleClass.startShellString());
