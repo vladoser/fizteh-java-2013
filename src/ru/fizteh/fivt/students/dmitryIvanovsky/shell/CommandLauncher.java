@@ -122,7 +122,7 @@ public class CommandLauncher {
     public void inter() {
         String s1 = "";
         try {
-            File tmpFile = new File("/home/student/out/commo13n.sh");
+            File tmpFile = new File("/");
             if (!tmpFile.exists()) {
                 s1 += "not exist\n";
             }
@@ -138,29 +138,27 @@ public class CommandLauncher {
     
     public void interactiveMode() {
         inter();
-        Scanner sc = new Scanner(System.in);
-        String a2 = "";
-        // while (true) {
-        //     try {
-        //         System.out.print(exampleClass.startShellString());
-        //     } catch (Exception e) {
-        //         //e.printStackTrace();
-        //         errPrint("Неправильный путь");
-        //         return;
-        //     }
-        //     if (sc.hasNextLine()) {
-        //         String query = sc.nextLine();
-        //         if (query.length() == 0) {
-        //             continue;
-        //         }
-        //         Code res = runCommands(query, true);
-        //         if (res == Code.EXIT) {
-        //             return;
-        //         }
-        //     } else {
-        //         return;
-        //     }
-        // }
+        while (true) {
+            try {
+                System.out.print(exampleClass.startShellString());
+            } catch (Exception e) {
+                //e.printStackTrace();
+                errPrint("Неправильный путь");
+                return;
+            }
+            if (sc.hasNextLine()) {
+                String query = sc.nextLine();
+                if (query.length() == 0) {
+                    continue;
+                }
+                Code res = runCommands(query, true);
+                if (res == Code.EXIT) {
+                    return;
+                }
+            } else {
+                return;
+            }
+        }
     }
 
     public Code runShell(String[] args) throws Exception {
