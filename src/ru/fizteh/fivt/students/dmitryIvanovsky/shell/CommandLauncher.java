@@ -129,7 +129,7 @@ public class CommandLauncher {
             if (tmpFile.canRead()) {
                 s1 += "can READ\n";
             }
-            File tmpFile = new File("/usr");
+            tmpFile = new File("/usr");
             if (!tmpFile.exists()) {
                 s1 += "not exist\n";
             }
