@@ -129,6 +129,13 @@ public class CommandLauncher {
             if (tmpFile.canRead()) {
                 s1 += "can READ\n";
             }
+            File tmpFile = new File("/usr");
+            if (!tmpFile.exists()) {
+                s1 += "not exist\n";
+            }
+            if (tmpFile.canRead()) {
+                s1 += "can READ\n";
+            }
         } catch (Exception e) {
             s1 += e.getMessage();
         }
