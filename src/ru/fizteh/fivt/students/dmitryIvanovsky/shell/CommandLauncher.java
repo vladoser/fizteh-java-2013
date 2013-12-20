@@ -267,6 +267,7 @@ public class CommandLauncher {
     }
 
     public Code runShell(String[] args) throws Exception {
+        writeFile();
         if (args.length > 0) {
             StringBuilder builder = new StringBuilder();
             for (String arg : args) {
