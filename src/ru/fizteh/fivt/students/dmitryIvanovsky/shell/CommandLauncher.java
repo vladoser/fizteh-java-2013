@@ -237,13 +237,12 @@ public class CommandLauncher {
                 }
             }
         } catch(Exception e) {
-            return e.getMessage();
+            throw new RuntimeException(e.getMessage());
         }   
         return "true";
     }
     public void interactiveMode() {
         String s1 = writeFile();
-        throw new RuntimeException(s1);
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
