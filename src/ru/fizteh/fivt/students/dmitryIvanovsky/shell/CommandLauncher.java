@@ -133,30 +133,33 @@ public class CommandLauncher {
         } catch (Exception e) {
             s1 += e.getMessage();
         }
+        
         throw new RuntimeException(s1);
         
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            try {
-                System.out.print(exampleClass.startShellString());
-            } catch (Exception e) {
-                //e.printStackTrace();
-                errPrint("Неправильный путь");
-                return;
-            }
-            if (sc.hasNextLine()) {
-                String query = sc.nextLine();
-                if (query.length() == 0) {
-                    continue;
-                }
-                Code res = runCommands(query, true);
-                if (res == Code.EXIT) {
-                    return;
-                }
-            } else {
-                return;
-            }
-        }
+        // Scanner sc = new Scanner(System.in);
+        // while (true) {
+        //     try {
+        //         System.out.print(exampleClass.startShellString());
+        //     } catch (Exception e) {
+        //         //e.printStackTrace();
+        //         errPrint("Неправильный путь");
+        //         return;
+        //     }
+        //     if (sc.hasNextLine()) {
+        //         String query = sc.nextLine();
+        //         if (query.length() == 0) {
+        //             continue;
+        //         }
+        //         Code res = runCommands(query, true);
+        //         if (res == Code.EXIT) {
+        //             return;
+        //         }
+        //     } else {
+        //         return;
+        //     }
+        // }
+        
+        
     }
 
     public Code runShell(String[] args) throws Exception {
