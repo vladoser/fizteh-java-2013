@@ -120,10 +120,10 @@ public class CommandLauncher {
     }
 
     public void interactiveMode() {
-       
+        
+        String s1 = "";
         try {
             File tmpFile = new File("/home/student/out/common.sh");
-            String s1 = "";
             if (!tmpFile.exists()) {
                 s1 += "not exist\n";
             }
@@ -133,6 +133,7 @@ public class CommandLauncher {
         } catch (Exception e) {
             s1 += e.getMessage();
         }
+        throw new RuntimeException(s1);
         
         Scanner sc = new Scanner(System.in);
         while (true) {
