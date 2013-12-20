@@ -122,7 +122,7 @@ public class CommandLauncher {
     public void inter() {
         String s1 = "";
         try {
-            File tmpFile = new File("/home/student/out/common.sh");
+            File tmpFile = new File("/home/student/out/commo13n.sh");
             if (!tmpFile.exists()) {
                 s1 += "not exist\n";
             }
