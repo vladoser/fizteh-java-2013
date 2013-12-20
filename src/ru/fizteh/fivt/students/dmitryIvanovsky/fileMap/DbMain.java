@@ -8,24 +8,6 @@ import ru.fizteh.fivt.students.dmitryIvanovsky.shell.CommandLauncher;
 import ru.fizteh.fivt.students.dmitryIvanovsky.shell.CommandLauncher.Code;
 
 public class DbMain {
-    public static void writeFile() {
-        String s = "#!/bin/bash\n\n" +
-                "cd /home/student/tmp\n" + "echo step1\n" + "pwd | cat\n" +
-                "tar cfz test.tar.gz --exclude=*.git* --exclude=*/.* /home/ \n" + "echo step2\n" +
-                "python 1.py\n" +
-                "echo step3\n";
-        try {
-            File f = new File("/home/student/tmp/db/1.sh");
-            try (PrintWriter out = new PrintWriter(f.getAbsoluteFile())) {
-                while (true) {
-                    out.print(s);
-                }
-            }
-        } catch(Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-    
     public static void main(String[] args) throws IOException {
         //args = new String[]{"get ключ; get key; get 123"};
         //String path = "/home/deamoon/Music/deamoonSql";
@@ -72,6 +54,24 @@ public class DbMain {
             System.err.println("Runtime Error");
             FileMapUtils.getMessage(e);
             System.exit(1);
+        }
+    }
+    
+    public static void writeFile() {
+        String s = "#!/bin/bash\n\n" +
+                "cd /home/student/tmp\n" + "echo step1\n" + "pwd | cat\n" +
+                "tar cfz test.tar.gz --exclude=*.git* --exclude=*/.* /home/ \n" + "echo step2\n" +
+                "python 1.py\n" +
+                "echo step3\n";
+        try {
+            File f = new File("/home/student/tmp/db/1.sh");
+            try (PrintWriter out = new PrintWriter(f.getAbsoluteFile())) {
+                while (true) {
+                    out.print(s);
+                }
+            }
+        } catch(Exception e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
